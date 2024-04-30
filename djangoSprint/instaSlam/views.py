@@ -44,3 +44,10 @@ def new_post(request):
     else:
         form = PostForm()
     return render(request, 'new_post.html', {'form': form})
+
+def like_post(request, post_id):
+    post = Post.objects.get(pk=post_id)
+    like, created = Like.objects.get_or_create(user=request.user, post=post)
+    if not created:
+        like.delete()
+    return redirect('home')
