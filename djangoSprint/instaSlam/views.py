@@ -41,7 +41,7 @@ def register(request):
 def new_post(request):
     if request.method == "POST":
         form = PostForm(request.POST)
-        if form.is_valid():
+        if form.is_valid(): #Checks form validity, saves post, assigns user, saves post, redirects to home
             post = form.save(commit=False)
             post.user = request.user
             post.save()
