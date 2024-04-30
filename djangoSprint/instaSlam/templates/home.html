@@ -1,0 +1,14 @@
+<a href="{% url 'new_post' %}"><button>New Post</button></a>
+
+{% for post in posts %}
+<div>
+   <h2>{{ post.title }}</h2>
+   <p>{{ post.message }}</p>
+   <p>Posted by {{ post.user.username }}</p>
+   <form action="{% url 'like_post' post.id %}" method="post">
+      {% csrf_token %}
+      <button type="submit">Like</button>
+   </form>
+   <p>Likes: {{ post.like_count }}</p>
+</div>
+{% endfor %}
